@@ -15,7 +15,7 @@ Input: head = [-1,5,3,4,0]
 
 Output: [-1,0,3,4,5]
 
-## CodePath
+## CodePath (Substring)
 
 Write a function that takes in two strings and returns true if the second string is substring of the first, and false otherwise. 
 
