@@ -1,12 +1,12 @@
 package Day33;
 
-public class design_linked_list {
+public class MyLinkedList {
     
     /** Initialize your data structure here. */
     
     ArrayList<Integer> list;
 
-    public design_linked_list() {
+    public MyLinkedList() {
         list = new ArrayList<Integer>();
         
     }
