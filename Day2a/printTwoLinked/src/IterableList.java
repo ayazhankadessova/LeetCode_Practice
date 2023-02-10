@@ -41,6 +41,28 @@ public class IterableList<T> implements Iterable<T>, Iterator<T> {
 
     }
 
+    public void printLots(IterableList<T> list2) {
+
+        for (T element: list2) {
+            System.out.println(this.get(((Integer)element)).value);
+        }
+
+    }
+
+    private Node get(int element) {
+
+        int counter = 0;
+        Node curNode = head;
+        while(counter!=element) {
+            curNode = curNode.next; 
+            if (curNode.next==tail) {
+                return new Node(null);
+            }
+            counter++;
+        }
+        return curNode;
+    }
+
     @Override
     public Iterator<T> iterator() {
         current = head;
@@ -57,8 +79,9 @@ public class IterableList<T> implements Iterable<T>, Iterator<T> {
 
     @Override 
     public T next() {
+        current = current.next;
         // TODO Auto-generated method stub
-        return current.next.value;
+        return current.value;
     }
     public static void main(String[] args) throws Exception {
         IterableList<Integer> iterList = new IterableList<Integer>();
@@ -78,6 +101,8 @@ public class IterableList<T> implements Iterable<T>, Iterator<T> {
         for (Integer value : iterList) {
             System.out.println(value);
         }
+
+        iterList.printLots(iterList2);
 
     }
 }
