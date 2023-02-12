@@ -11,3 +11,7 @@ You are given a list, L, and another list, P, containing integers sorted in asce
 5. If x not head -> prevX.next = currY. If head -> Y
 6. Same for y
 7. Swap next pointers
+
+## Exercise 3.3 Find Intersection
+
+Given two sorted lists, L1 and L2, write a procedure to compute L1 ∩ L2 using only the basic list operations.
