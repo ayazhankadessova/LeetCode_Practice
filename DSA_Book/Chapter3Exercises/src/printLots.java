@@ -2,12 +2,19 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 
-//    1. Initialize iterators
-//    2. Initialize count, initialize positionP
-//    3. For every position, iter array and check if position=index
-//    4. print
+/* 
 
-public class Chapter_3_1 {
+3.1 You are given a list, L, and another list, P, containing integers sorted in ascending order. 
+The operation printLots(L,P) will print the elements in L that are in positions specified by P. 
+For instance, if P = 1, 3, 4, 6, the elements in positions 1, 3, 4, and 6 in L are printed. Write the procedure printLots(L,P). 
+
+1. Initialize iterators
+2. Initialize count, initialize positionP
+3. For every position, iter array and check if position=index
+4. print
+*/
+
+public class printLots {
 
     public static void main(String args[]) {
         System.out.println("Chapter_3_1");
