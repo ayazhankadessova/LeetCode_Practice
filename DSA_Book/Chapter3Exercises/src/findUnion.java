@@ -67,6 +67,11 @@ public class findUnion<Antype> {
 		list2.add(6);
 
         TryOne.union(list1, list2, Result);
+        ListIterator<Integer> resultIter = Result.listIterator();
+		while(resultIter.hasNext()){
+			Integer item = resultIter.next();
+			System.out.println(item);
+		}
     }
     
 }
