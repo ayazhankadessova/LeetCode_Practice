@@ -60,3 +60,30 @@ The Josephus problem is the following game: N people, numbered 1 to N, are sitti
 4. If while skipping we reach a tail, then we start from the head.next
 5. Delete element -> reassign next/prev
 6. When only one element is left, then return head.next
+
+## Exercise 3.9/ 3.10: Collections addAll() and removeAll()
+
+Provide an implementation of an addAll method for the MyArrayList class. Method addAll adds all items in the specified collection given by items to the end of the MyArrayList. Also provide the running time of your implementation. The method signature for you to use is slightly different than the one in the Java Collections API, and is as follows:
+
+```
+ public void addAll( Iterable<? extends AnyType> items )
+```
+
+- Approach:
+
+1. Given iterable items list, get the iterator and add while hasNext()
+
+- This runs in O(N) time, where N is the size of the items collection.
+
+Provide an implementation of a removeAll method for the MyLinkedList class. Method removeAll removes all items in the specified collection given by items from the MyLinkedList. Also provide the running time of your implementation. The method signature for you to use is slightly different than the one in the Java Collections API, and is as follows:
+
+```
+public void removeAll( Iterable<? extends AnyType> items )
+```
+
+- Approach:
+
+1. Given iterable items list, get the iterator and check everything in the specified collection
+2. Get the iterator for original list and iterate through it to check if this elements exists there too. If yes, remove it from the original collection.
+
+- This runs in O(MN), where M is the size of the items, and N is the size of the list.
