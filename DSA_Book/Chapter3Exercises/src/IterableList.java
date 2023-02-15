@@ -84,8 +84,8 @@ public class IterableList<T> implements Iterable<T>, Iterator<T> {
         return current.value;
     }
     public static void main(String[] args) throws Exception {
-        JosephusIterableList<Integer> iterList = new JosephusIterableList<Integer>();
-        JosephusIterableList<Integer> iterList2 = new JosephusIterableList<Integer>();
+        IterableList<Integer> iterList = new IterableList<Integer>();
+        IterableList<Integer> iterList2 = new IterableList<Integer>();
 
         int[] arrayInt = {1, 3, 4, 6};
         int[] arrayInt2 = {1,2,3,4,5,6,7};
