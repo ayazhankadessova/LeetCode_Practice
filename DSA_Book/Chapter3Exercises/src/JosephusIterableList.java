@@ -1,5 +1,15 @@
 import java.util.Iterator;
 
+/*
+ * Josephus Problem Approach:
+ * 1. Create a Doubly Linked List
+ * 2. Start with head, iterate while only one element is left
+ * 3. skip specified number of times
+ * 4. If while skipping we reach a tail, then we start from the head.next
+ * 5. Delete element -> reassign next/prev
+ * 6. When only one element is left, then return head.next
+ * 
+ */
 public class JosephusIterableList<T> implements Iterator<T>, Iterable<T> {
 
     /**
@@ -20,7 +30,7 @@ public class JosephusIterableList<T> implements Iterator<T>, Iterable<T> {
     // keep track of what we are iterating
     Node current;
     int size;
-    public boolean reverse = false;
+    int skip;
 
     /**
      *  Initialize an IterableList
@@ -28,12 +38,47 @@ public class JosephusIterableList<T> implements Iterator<T>, Iterable<T> {
      *  Head's next is tail.
      *  Tail's prev is head.
      */
-    JosephusIterableList() {
+    JosephusIterableList(int m) {
         this.head = new Node(null);
         this.tail =new Node(null);
+        this.skip = m;
         head.next = tail;
         tail.previous = head;
     }
+
+    /*
+     * Josephus problem driver
+     */
+    public T josephusProblem() {
+        Node start = head.next;
+        while (size>1) {
+            int i = 0;
+            while(i < skip) {
+                if (start.next==null) {
+                    start=head.next;
+                    System.out.println("Next is null");
+                }
+                System.out.println(start.value);
+                start = start.next;
+                i++;
+            }
+            if(start == head) {
+                start=start.next;
+            } else if (start == tail) {
+                start=head.next;
+            }
+            System.out.println("Deleting: " + start.value);
+            this.delete(start);
+            start = start.next;
+            
+            size--;
+            System.out.println("size" + size);
+        }
+        
+        return head.next.value;
+    }
+
+    // public T getRem
 
     /**
      * Appends a value to the doubly Linked list's end
@@ -52,6 +97,15 @@ public class JosephusIterableList<T> implements Iterator<T>, Iterable<T> {
         newNode.next = tail;
         tail.previous = current.next;
         size++;
+    }
+
+    public void delete(Node node) {
+        node.previous.next = node.next;
+        System.out.println("Next Value reassigned: "+ node.previous.next.value);
+        if( node.next != null) {
+            node.next.previous = node.previous;
+        }
+        
     }
 
     /**
@@ -90,24 +144,13 @@ public class JosephusIterableList<T> implements Iterator<T>, Iterable<T> {
     }
 
     public static void main(String[] args) {
-        IterableList<String> list= new IterableList<>();
-        String[] data = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-        for (String i : data)
+        JosephusIterableList<Integer> list= new JosephusIterableList<>(1);
+        int[] data = {1, 2, 3, 4, 5};
+        for (int i : data)
             list.append(i);
-        /// expected output: Mon Tue Wed Thu Fri Sat Sun
-        for (String s: list)
-            System.out.print(s + " ");
-        System.out.println();
-/// expeced output: Sun Sat Fri Thu Wed Tue Mon
-        list.reverse = true;
-        for (String s: list)
-            System.out.print(s + " ");
-        System.out.println();
-/// expected output: Mon Tue Wed Thu Fri Sat Sun
-        list.reverse = false;
-        for (String s: list)
-            System.out.print(s + " ");
-        System.out.println();
+        
+
+        System.out.println("Joesphus Problem with " +list.skip + " skips: " + list.josephusProblem());
     }
 }
     
