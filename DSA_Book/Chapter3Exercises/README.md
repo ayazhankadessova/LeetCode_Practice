@@ -48,7 +48,7 @@ Given two sorted lists, L1 and L2, write a procedure to compute L1 ∪ L2 using 
 
 6. Iterate through res
 
-## [Exercise 3.6 Josephus Problem (Feb, 15)](https://github.com/ayazhankadessova/LeetCode_Practice/blob/main/DSA_Book/Chapter3Exercises/src/JosephusIterableList.java)
+## Exercise 3.6 Josephus Problem (Feb, 15) -> [Solution](https://github.com/ayazhankadessova/LeetCode_Practice/blob/main/DSA_Book/Chapter3Exercises/src/JosephusIterableList.java)
 
 The Josephus problem is the following game: N people, numbered 1 to N, are sitting in a circle. Starting at person 1, a hot potato is passed. After M passes, the person holding the hot potato is eliminated, the circle closes ranks, and the game continues with the person who was sitting after the eliminated person picking up the hot potato. The last remaining person wins. Thus, if M = 0 and N = 5, players are eliminated in order, and player 5 wins. If M = 1 and N = 5, the order of elimination is 2, 4, 1, 5.
 
@@ -61,7 +61,7 @@ The Josephus problem is the following game: N people, numbered 1 to N, are sitti
 5. Delete element -> reassign next/prev
 6. When only one element is left, then return head.next
 
-## Exercise 3.9/ 3.10: Collections addAll() and removeAll()
+## Exercise 3.9/ 3.10: Collections addAll() and removeAll() -> [Solution](https://github.com/ayazhankadessova/LeetCode_Practice/blob/main/DSA_Book/Chapter3Exercises/src/ArrayListTest.java) 
 
 Provide an implementation of an addAll method for the MyArrayList class. Method addAll adds all items in the specified collection given by items to the end of the MyArrayList. Also provide the running time of your implementation. The method signature for you to use is slightly different than the one in the Java Collections API, and is as follows:
 
