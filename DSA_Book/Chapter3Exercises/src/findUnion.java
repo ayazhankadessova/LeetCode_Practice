@@ -2,6 +2,27 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.List;
 
+```
+Given two sorted lists, L1 and L2, write a procedure to compute L1 ∪ L2 using only the basic list operations.
+
+1. Initialize iterators for two lists
+2. Get the first element of the list
+3. While at least of the elements are not null, continue.
+
+- different from intersection because union means all the elems in both, no duplicates tho
+
+4. if one of the elements is null, get everything from the other list
+
+- eg: elem1 is null -> collect all elements that are left in list2
+
+5. if both are not null: compare them
+
+- if elem1 is smaller -> advance it, because we will not meet it again and there is no danger we will add it twice
+- if elem1 is bigger -> advance iter2, because there is a change that we meet elem1 duplicate is list2 later
+
+6. Iterate through res
+```
+
 public class findUnion<Antype> {
 
 
