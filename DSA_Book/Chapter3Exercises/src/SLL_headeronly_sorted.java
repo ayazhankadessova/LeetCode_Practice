@@ -80,10 +80,10 @@ public class SLL_headeronly_sorted<T extends Comparable<T>> {
     }
       else { 
       Node p = new Node(data);
-        if (header.next != null && p.data.compareTo(header.next.data) < 0) {
-             p.next = header.next;
-             header.next = p;
-        } else {
+        // if (header.next != null && p.data.compareTo(header.next.data) < 0) {
+        //      p.next = header.next;
+        //      header.next = p;
+        // } else {
             Node previous = header;
             Node current = header.next;
 
@@ -95,7 +95,7 @@ public class SLL_headeronly_sorted<T extends Comparable<T>> {
             p.next = previous.next;
             previous.next = p;
         }
-        }
+        // }
 
       size++;
       return true;
