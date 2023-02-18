@@ -7,30 +7,31 @@ private class ArrayListTest<AnyType> {
     /*
      * O(N)
      */
-    public void addAll(Iterable<? extends AnyType> items) {
-        Iterator<? extends AnyType> iter = items.iterator();
-        while (iter.hasNext()) {
-            this.add(iter.next());
-        }
-    }
+    public void addAll( Iterable<? extends AnyType> items ) {
+        Iterator<? extends AnyType> iter = items.iterator(); 
+        while ( iter.hasNext() ){
+        this.add(iter.next());
+      }
+}
 
     /*
      * O(NM)
      */
 
-    public void removeAll(Iterable<? extends AnyType> items) {
+    public void removeAll( Iterable<? extends AnyType> items ) {
         AnyType item, element;
         Iterator<? extends AnyType> iterItems = items.iterator();
-        while (iterItems.hasNext()) {
-            item = iterItems.next();
-            Iterator<? extends AnyType> iterList = iterator();
-            while (iterList.hasNext()) {
+            while ( iterItems.hasNext ( ) )
+            {
+        item = iterItems.next();
+        Iterator<? extends AnyType> iterList = iterator(); 
+        while ( iterList.hasNext ( ) )
+        {
                 element = iterList.next();
-                if (element.equals(item))
+                if ( element.equals(item) )
                     iterList.remove();
-            }
-        }
-    }
+                }
+        } }
 
     private Iterator<? extends AnyType> iterator() {
         return this.iterator();
@@ -48,10 +49,12 @@ private class ArrayListTest<AnyType> {
         colorlist.add("blue");
         colorlist.add("yellow");
 
+
         ArrayList<String> colorlist2 = new ArrayList<>();
 
-        String[] colorlist3 = { "purple", "white" };
-        for (String elem : colorlist3) {
+
+        String[] colorlist3 = {"purple", "white"};
+        for (String elem: colorlist3) {
             colorlist2.add(elem);
         }
         Collection<? extends String> colorlist4 = colorlist2;
@@ -85,5 +88,5 @@ private class ArrayListTest<AnyType> {
         }
 
     }
-
+    
 }
