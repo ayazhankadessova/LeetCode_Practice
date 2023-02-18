@@ -13,12 +13,16 @@ Approach:
 1. Initilize head
 2. Initialize head.next
 3. Contains: iter with while and checl
-4. add: check if contains, if not, create p and p.next = head.next; head.next = p; add in the middle
+4. add: check if contains, if not, create p 
+5. To keep sorted , check if it is more than header.next. 
+    * If yes, insert as usual: p.next = header.next; header.next = p;
+    * If no, start iterating further from header, while remembering the previous node until the end OR until 
+
 5. remove: check if contains. Do tracing node and current node. When found node to remove -> prev.next = current.next
 
  */
 
-public class SLL_headeronly_sorted<T> implements Comparable<T> {
+public class SLL_headeronly_sorted<T extends Comparable<T>> {
 
     private Node header;
     int size;
@@ -37,7 +41,7 @@ public class SLL_headeronly_sorted<T> implements Comparable<T> {
             this.data = data;
         }
     }
-
+   
     public int getSize() {
         return size;
     }
@@ -71,22 +75,31 @@ public class SLL_headeronly_sorted<T> implements Comparable<T> {
     }
 
     boolean add( T data ) {
-    if (contains(data))
-      return false;
-      else {
+    if (contains(data)) {
+        return false;
+    }
+      else { 
       Node p = new Node(data);
-        if (p.data.compareTo(header.next.data) ) {
+        if (header.next != null && p.data.compareTo(header.next.data) < 0) {
              p.next = header.next;
-      header.next = p;
+             header.next = p;
+        } else {
+            Node previous = header;
+            Node current = header.next;
+
+            while (current != null && current.data.compareTo(data) < 0 ) {
+                System.out.println(current.data + " is less than " + data );
+                previous = current;
+                current = current.next;
+            }
+            p.next = previous.next;
+            previous.next = p;
+        }
         }
 
-
-      p.next = header.next;
-      header.next = p;
       size++;
+      return true;
     }
-    return true;
-  }
 
 
   /*
@@ -106,6 +119,7 @@ public class SLL_headeronly_sorted<T> implements Comparable<T> {
                 previous = current;
                 current = current.next;
             }
+            System.out.println("Removed: " + data + "!");
             previous.next = current.next;
             size--;
 
@@ -118,17 +132,21 @@ public class SLL_headeronly_sorted<T> implements Comparable<T> {
 
         SLL_headeronly_sorted<Integer> iterList = new SLL_headeronly_sorted<Integer>();
 
-        int[] arrayInt = {1, 3, 4, 6, 3};
+        int[] arrayInt = {1, 3, 4, 6, 3, 8, 25};
 
+        // Add elements keeping the ascending order
         for (int elem: arrayInt) {
             iterList.add(elem);
         }
 
+        System.out.print("Sorted list: ");
         iterList.printList();
         System.out.println("Get the size of the list: " + iterList.size);
         System.out.println("Contains 9: " + iterList.contains(9));
+        System.out.print("Try to remove 1, which is in the list: ");
         iterList.remove(1);
         System.out.println("Get the size of the list: " + iterList.size);
+        System.out.print("Try to remove 10, which is NOT in the list: ");
         iterList.remove(10);
         
     }
