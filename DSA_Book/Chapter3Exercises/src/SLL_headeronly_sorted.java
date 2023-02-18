@@ -16,7 +16,9 @@ Approach:
 4. add: check if contains, if not, create p 
 5. To keep sorted , check if it is more than header.next. 
     * If yes, insert as usual: p.next = header.next; header.next = p;
-    * If no, start iterating further from header, while remembering the previous node until the end OR until 
+    * If no, start iterating from header to end, while remembering the previous node until we find a node which is more than one we want to insert.
+    * Make new node point to where previous node pointed.
+    * Make previous node point to new node.
 
 5. remove: check if contains. Do tracing node and current node. When found node to remove -> prev.next = current.next
 
