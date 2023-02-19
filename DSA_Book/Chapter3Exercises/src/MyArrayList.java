@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.ListIterator;
 
 /*
@@ -158,6 +159,10 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
         return new ArrayListIterator();
     }
 
+    public java.util.Iterator<AnyType> reverseIterator() {
+        return new ArrayListReverseIterator();
+    }
+
     /**
      * Returns a String representation of this collection.
      */
@@ -241,7 +246,41 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
 
     }
 
-    public static void main(String[] args) {
+    /**
+     * This is the implementation of the Reverse Iterator.
+     * Starts with the end of the list. Utilized MyArrayList remove based on index.
+     */
+
+    private class ArrayListReverseIterator<AnyType> implements java.util.Iterator<AnyType> {
+
+        private int current = size();
+
+        @Override
+        public boolean hasNext() {
+            return current > 0;
+        }
+
+        @Override
+        public AnyType next() {
+            if (!hasNext())
+                throw new java.util.NoSuchElementException();
+            // backwards = true;
+            return (AnyType) theItems[--current];
+        }
+
+        @Override
+        public void remove() {
+            System.out.println("Removed: " + theItems[--current]);
+            // MyArrayList.this.remove(current--);
+            // else
+            MyArrayList.this.remove(current);
+
+        }
+
+    }
+
+    public static <AnyType> void main(String[] args) {
+
         MyArrayList<Integer> lst = new MyArrayList<Integer>();
 
         System.out.println("Adding to ArrayList: ");
@@ -265,5 +304,17 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
         lst.remove(lst.size() - 1);
 
         System.out.println(lst);
+
+        Iterator<Integer> ritr = lst.reverseIterator();
+        System.out.print("[ ");
+        while (ritr.hasNext())
+            System.out.print(ritr.next() + " ");
+        System.out.print(" ]");
+
+        Iterator<Integer> newritr = lst.reverseIterator();
+        System.out.println("\n[ ");
+        while (newritr.hasNext())
+            newritr.remove();
+        System.out.print(" ]");
     }
 }
