@@ -3,6 +3,11 @@
 
 3.2 Lazy Deletion
 
+1. Add Market field (true for deleted, false for non deleted). 
+2. Add Find() function which deleted the node with a specified data. 
+3. Add LazyDeletion() functions which finds the node to delete and marks it deleted. 
+4. Add Delete() function, which traverses the list and deleted the nodes that are marked to be deleted.
+
 */
 class Node<AnyType> {
     AnyType data;
