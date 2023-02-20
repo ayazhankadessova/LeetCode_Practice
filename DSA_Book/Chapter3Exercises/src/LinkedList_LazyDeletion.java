@@ -35,6 +35,9 @@ class LinkedList_LazyDeletion<AnyType> {
         head = new_Node;
     }
 
+    /*
+     * Finds node with specified data.
+     */
     Node Find(AnyType X) {
         Node P = this.head;
         while (P != null && (P.data != X || P.Marked == true))
@@ -42,6 +45,9 @@ class LinkedList_LazyDeletion<AnyType> {
         return P;
     }
 
+    /*
+     * Finds Node to delete and marks it as deleted.
+     */
     void Lazy_Deletion(AnyType X) {
         Node P;
         P = Find(X);
