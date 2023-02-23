@@ -18,7 +18,7 @@ class BasicCalculator {
                 break;
             } else if (toCalculate[i] == '(') {
                 i++;
-                dfs();
+                sum += operator*dfs();
             } else if(toCalculate[i] == '+') {
                 operator = 1;
             } else if (toCalculate[i] == '-') {
