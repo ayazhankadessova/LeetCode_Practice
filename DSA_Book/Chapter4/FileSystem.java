@@ -1,6 +1,13 @@
 import java.io.*;
 
-// Approach:1. Start listing with depth 0 2. Print name->if dir:dir+name;if file:fileName+length 3. check if directory:if dir->repeat same for every file in dir
+// Approach: 
+// 1. Start listing with depth 0 
+// 2. Add spaces for depth;
+// - Print name of current file->
+//     if dir:dir+name;    
+//     if file:fileName+length 
+// 3. check current file is directory itself:
+//     if dir->repeat same for every file in dir.
 
 class FileSystem {
 
