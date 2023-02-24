@@ -1,66 +1,49 @@
+import java.io.*;
+
+// Approach:1. Start listing with depth 0 2. Print name->if dir:dir+name;if file:fileName+length 3. check if directory:if dir->repeat same for every file in dir
+
 class FileSystem {
 
-    Node root;
+    private void list(File f) {
+        list(f, 0);
+    }
 
-    class Node {
-        Node firstChild;
-        Node NextSibling;
-        String value;
+    private void list(File f, int depth) {
 
-        Node(String value) {
-            this.value = value;
+        // start listing with current
+        // check if current is a directory
+        // if yes -> list every files inside with depth + 1 (will check if those file in
+        // their turn are dirs
+
+        printName(f, depth);
+
+        if (f.isDirectory()) {
+            File[] files = f.listFiles();
+            for (File file : files) {
+                list(file, depth + 1);
+            }
         }
     }
 
-    // String : 'usr/bin'
-
-    public void insert(String value) {
-        String[] stringArray = value.split("/");
-        String name = stringArray[stringArray.length - 1];
-        Node newNode = new Node(name);
-        if (root == null) {
-            root = newNode;
-            System.out.println("insertHere: " + root.value);
+    private void printName(File file, int depth) {
+        String name = file.getName();
+        // deeper -> more - from the left side
+        for (int i = 0; i < depth; i++) {
+            System.out.print("-");
+        }
+        // if f directory -> print dir and name
+        // if file -> name and length
+        if (file.isDirectory()) {
+            System.out.println("Directory: " + name);
         } else {
-            Node current = root;
-            for (int i = 0; i < stringArray.length - 1; i++) {
-                Node insertHere;
-                if (current.firstChild != null) {
-                    System.out.println("insertHere: " + current.firstChild);
-                    insertHere = dfs(current.firstChild, stringArray[i]);
-                    if (insertHere == null) {
-                        while (current.firstChild.NextSibling != null) {
-                            current = current.firstChild.NextSibling;
-                        }
-                        current.firstChild.NextSibling = newNode;
-
-                    }
-
-                }
-            }
+            System.out.println("Name: " + name + " Size: " + file.length());
         }
     }
 
-    public Node dfs(Node firstChild, String parent) {
-        if (firstChild.value.compareTo(parent) == 0) {
-            return firstChild;
-        }
-        while (firstChild.NextSibling != null) {
-
-            if (firstChild.NextSibling.value.compareTo(parent) == 0) {
-                return firstChild.NextSibling;
-            }
-        }
-        return null;
-    }
-
-    public FileSystem() {
-        root = null;
-    }
-
-    public static void main(String[] args) {
-        FileSystem files = new FileSystem();
-        files.insert("usr");
-        files.insert("usr/bin");
+    public static void main(String args[]) {
+        FileSystem L = new FileSystem();
+        File f = new File("/Users/ayazhan/Documents/GitHub/LeetCode_Practice/Inspiration");
+        System.out.println(f);
+        L.list(f);
     }
 }
