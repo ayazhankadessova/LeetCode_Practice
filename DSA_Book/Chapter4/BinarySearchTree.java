@@ -20,15 +20,16 @@ public class BinarySearchTree {
         root = null;
     }
 
-    public void insert(int value) {
+    public Node insert(int value) {
         if (root == null) {
             root = new Node(value);
         } else {
             insert(root, value);
         }
+        return root;
     }
 
-    public void insert(Node node, int value) {
+    public Node insert(Node node, int value) {
         if (value < node.value) {
             if (node.left == null) {
                 node.left = new Node(value);
@@ -42,6 +43,50 @@ public class BinarySearchTree {
                 insert(node.right, value);
             }
         }
+        return node;
+    }
+
+    public void delete(int value) {
+        root = deleteR(value, root);
+        // delete(value, root);
+    }
+
+    /*
+     * Delete recursively
+     * 1. Find the node to be deleted
+     * 2. Check cases: 1/2/0 children
+     */
+    private Node deleteR(int v, Node n) {
+        if (n == null)
+            return null;
+        if (v < n.value)
+            n.left = deleteR(v, n.left);
+        else if (v > n.value)
+            n.right = deleteR(v, n.right);
+        else {
+            System.out.println("HERE");
+            // node with only one child or no child -> return the child that exists
+            if (n.left == null)
+                return n.right;
+            else if (n.right == null)
+                return n.left;
+
+            // node with two children: get smallest in right subtree
+            n = removeMinNode(n.right);
+
+            // Delete the inorder successor
+            n.right = deleteR(v, n.right);
+        }
+        // important!
+        return n;
+    }
+
+    private Node removeMinNode(Node right) {
+
+        while (right.left != null) {
+            right = right.left;
+        }
+        return right;
     }
 
     /* Given a binary tree, print its nodes in inorder */
@@ -52,7 +97,7 @@ public class BinarySearchTree {
         /* first recur on left child */
         printInorder(node.left);
 
-        /* then print the data of node */
+        /* then print the value of node */
         System.out.print(node.value + " ");
 
         /* now recur on right child */
@@ -98,13 +143,24 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
+
         bst.insert(10);
         bst.insert(5);
         bst.insert(1);
         bst.insert(2);
         bst.insert(3);
 
+        System.out.println("\nInorder traversal: ");
         bst.printInorder();
+
+        System.out.println("\nDelete non existent element: ");
+        bst.delete(0);
+        bst.printInorder();
+
+        System.out.println("\nDelete existent element: ");
+        bst.delete(5);
+        bst.printInorder();
+
     }
 
 }
