@@ -105,6 +105,7 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
             else if (n.right == null)
                 return n.left;
 
+            // n = getMaxNode(n.left);
             n.data = getMax(n.left);
             n.left = deleteR(n.data, n.left);
 
@@ -253,6 +254,13 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
             node = node.right;
         }
         return node.data;
+    }
+
+    private Node<T> getMaxNode(Node<T> node) {
+        while (node.right != null) {
+            node = node.right;
+        }
+        return node;
     }
 
     @Override
