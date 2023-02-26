@@ -24,8 +24,11 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
             return new Node<>(data);
         }
         if (data.compareTo(node.data) < 0) {
+            System.out.println(data + " is less than " + node.data);
             node.left = insert(data, node.left);
         } else if (data.compareTo(node.data) > 0) {
+            System.out.println(data + " is more than " + node.data);
+
             node.right = insert(data, node.right);
         } else {
             return node;
@@ -36,19 +39,15 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     // heigh of node is max heigh of children
-    private void updateHeight(AVLTree<T>.Node<T> node) {
-        int maxHeight = 0;
-        if (node.left == null && node.right != null) {
-            maxHeight = node.right.height;
-        } else if (node.right == null && node.left != null) {
-            maxHeight = node.left.height;
-        } else if (node.right == null && node.left == null) {
-            node.height = 1;
-            return;
-        } else if (node.right != null && node.left != null) {
-            maxHeight = Math.max(node.right.height, node.left.height);
-        }
+    private void updateHeight(Node<T> node) {
+        int maxHeight = Math.max(
+                height(node.left),
+                height(node.right));
         node.height = maxHeight + 1;
+    }
+
+    private int height(Node<T> node) {
+        return node != null ? node.height : 0;
     }
 
     @Override
@@ -110,22 +109,22 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
         return node;
     }
 
-    private Node<T> rotateRight(Node<T> n) {
-        Node<T> leftNode = n.left;
+    private Node<T> rotateRight(Node<T> node) {
+        Node<T> leftNode = node.left;
         Node<T> centerNode = leftNode.right;
-        leftNode.right = n;
-        n.left = centerNode;
-        updateHeight(n);
+        leftNode.right = (node);
+        node.left = (centerNode);
+        updateHeight(node);
         updateHeight(leftNode);
         return leftNode;
     }
 
-    private Node<T> rotateLeft(Node<T> n) {
-        Node<T> rightNode = n.right;
+    private Node<T> rotateLeft(Node<T> node) {
+        Node<T> rightNode = node.right;
         Node<T> centerNode = rightNode.left;
-        rightNode.right = n;
-        n.right = centerNode;
-        updateHeight(n);
+        rightNode.left = (node);
+        node.right = (centerNode);
+        updateHeight(node);
         updateHeight(rightNode);
         return rightNode;
     }
@@ -199,8 +198,10 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
 
     public static void main(String[] args) {
         AVLTree<Integer> tree = new AVLTree<>();
-        tree.insert(10).insert(2).insert(6).insert(8).insert(25).insert(18).insert(35).insert(15).insert(22).insert(42)
-                .insert(30).insert(40).insert(12).insert(17).insert(19).insert(24).insert(28).insert(33).insert(38);
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(6);
+        tree.insert(11);
 
         tree.traverse();
     }
