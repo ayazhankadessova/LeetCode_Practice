@@ -5,7 +5,6 @@
 | 4.11  | BST with Insert, Delete, Find min | Approach:<br/>1. Insert BST checking for right/left.<br/>2. Delete based on cases: <br/>1) no children -> null; <br/>2) right/left child -> assign either. 3) 2 children -> get smallest from right subtree| [Solution](https://github.com/ayazhankadessova/LeetCode_Practice/blob/main/DSA_Book/Chapter4/BinarySearchTree.java) | Feb, 25 |
 | 4.20-25  | AVL Tree Generic Implementation | AVLTree class is a self-balancing binary search tree that extends the Tree interface.<br/>1. Node class has two children (left and right) and stores data of a generic type T, a height attribute that is used to balance the AVLTree.<br/>2. AVLTree class includes methods to insert, delete, and search for nodes in the tree. <br/>3. Insert & Delete are same as in BST + updatHeigh and applyrotation to keep balance every operation.<br/>4. balance determines which rotation to apply: L, R, RL, LR.<br/>5. height of a node in the AVLTree is defined as the maximum height of its children plus one.| [Solution](https://github.com/ayazhankadessova/LeetCode_Practice/blob/main/DSA_Book/Chapter4/AVLTree.java) | Feb, 26 |
 
-
 - Resources 
 1. Binary Search Tree: https://youtu.be/81PpYQ0AN_w
 2. AVL Tree: https://youtu.be/Jj9Mit24CWk
