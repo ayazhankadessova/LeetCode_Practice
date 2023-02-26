@@ -8,4 +8,4 @@
 - Resources 
 1. Binary Search Tree: https://youtu.be/81PpYQ0AN_w
 2. AVL Tree: https://youtu.be/Jj9Mit24CWk
-3. AVL Tree rotations: https://www.youtube.com/watch?v=vRwi_UcZGjU
+3. AVL Tree rotations: https://youtu.be/vRwi_UcZGjU
