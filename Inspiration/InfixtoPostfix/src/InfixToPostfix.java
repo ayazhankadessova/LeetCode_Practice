@@ -1,4 +1,5 @@
 import java.util.Stack;
+
 public class InfixToPostfix {
 
     public int getPriority(char c) {
@@ -15,37 +16,37 @@ public class InfixToPostfix {
 
         char ch[] = s.toCharArray();
 
-        for (char c: ch) {
-            if (c!= '+' && c!='-' && c!='*' && c!='/' && c!='(' && c!=')') {
+        for (char c : ch) {
+            if (c != '+' && c != '-' && c != '*' && c != '/' && c != '(' && c != ')') {
                 postfix += c;
             } else if (c == '(') {
+                // System.out.println("HEY");
                 st.push(c);
             } else if (c == ')') {
-                while(!st.isEmpty()) {
-                char t = st.pop();
-                if(t != '(') {
-                    postfix = postfix + t;
-                } else {
-                    break;
+                while (!st.isEmpty()) {
+                    char t = st.pop();
+                    if (t != '(') {
+                        postfix = postfix + t;
+                    } else {
+                        break;
+                    }
                 }
-                }
-            }
-            else if (c== '+' || c=='-' || c=='*' || c=='/' || c=='(' || c==')') {
+            } else if (c == '+' || c == '-' || c == '*' || c == '/') {
                 if (st.isEmpty()) {
                     st.push(c);
                 } else {
-                    while(!st.isEmpty()) {
+                    while (!st.isEmpty()) {
                         char t = st.pop();
                         if (t == '(') {
                             st.push(t);
                             break;
-                        } else if (t== '+' || t=='-' || t=='*' || t=='/') {
-                            // if priority not 
+                        } else if (t == '+' || t == '-' || t == '*' || t == '/') {
+                            // if priority not
                             if (getPriority(t) < getPriority(c)) {
                                 st.push(t);
                                 break;
                             } else {
-                                postfix = postfix+t;
+                                postfix = postfix + t;
                             }
                         }
                     }
@@ -53,22 +54,25 @@ public class InfixToPostfix {
                 }
             }
         }
-        while(!st.isEmpty()) {
-      postfix = postfix + st.pop();
-    }
-    return postfix;
+        while (!st.isEmpty()) {
+            postfix = postfix + st.pop();
+        }
+        return postfix;
 
-
     }
+
     public static void main(String[] args) {
-    InfixToPostfix a = new InfixToPostfix();
-    String s1 = a.infixToPostfix("2+3-1");
-    System.out.println(s1);
-    
-    String s2 = a.infixToPostfix("2+3*4");
-    System.out.println(s2);
-    
-    String s3 = a.infixToPostfix("3*(4+5)-6/(1+2)");
-    System.out.println(s3);
-  }
+        InfixToPostfix a = new InfixToPostfix();
+        String s1 = a.infixToPostfix("2+3-1");
+        System.out.println(s1);
+
+        String s2 = a.infixToPostfix("2+3*4");
+        System.out.println(s2);
+
+        String s3 = a.infixToPostfix("3*(4+5)-6/(1+2)");
+        System.out.println(s3);
+
+        String s4 = a.infixToPostfix("5+8*(3-2)*6-10/2");
+        System.out.println(s4);
+    }
 }
