@@ -1,4 +1,4 @@
-package LeetCodePlatform.Topics.BinaryTree;
+package BinaryTree;
 
 import java.util.*;
 
