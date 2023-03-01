@@ -1,8 +1,6 @@
 package BST_From_InOrder_PreOrder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 // Approach:
 // 1. Get root -> first in preorder
@@ -24,53 +22,61 @@ class BST_InPre {
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        // Base case: preorder is empty of inorder is empty
-        if (preorder.length == 0 || inorder.length == 0) {
+        // Base case: preorder is empty or inorder is empty
+        if (preorder == null || inorder.length == 0) {
             return null;
         }
 
         // Create TreeNode root, which is the first value in the preorder array
         TreeNode root = new TreeNode(preorder[0]);
+
         // Get index of root in preorder array
         int mid = getIndex(preorder[0], inorder);
-        int[] newPreOrderLeft = Arrays.copyOfRange(preorder, 1, mid+1);
+
+        // Partition inorder array into left and right subtree with the help of mid
+        int[] newPreOrderLeft = Arrays.copyOfRange(preorder, 1, mid + 1);
         int[] newInOrderLeft = Arrays.copyOfRange(inorder, 0, mid);
+
+        // Assignt to left
         root.left = buildTree(newPreOrderLeft, newInOrderLeft);
-        int[] newPreOrderRight = Arrays.copyOfRange(preorder, mid+1, preorder.length - 1);
-        int[] newInOrderRight = Arrays.copyOfRange(inorder, mid+1, inorder.length - 1);
+        // System.out.print(mid);
+        // System.out.print(preorder.length);
+        int[] newPreOrderRight = null;
+        int[] newInOrderRight = null;
+        if ((mid + 1) < preorder.length) {
+            newPreOrderRight = Arrays.copyOfRange(preorder, mid + 1, preorder.length);
+        } else {
+            newPreOrderRight = null;
+        }
+        if ((mid + 1) < inorder.length) {
+            newInOrderRight = Arrays.copyOfRange(inorder, mid + 1, inorder.length);
+        } else {
+            newInOrderRight = null;
+        }
+
+        // Assign to right
         root.right = buildTree(newPreOrderRight, newInOrderRight);
+
+        // do recursive calls & return root
 
         return root;
 
+    }
 
-        root.left()
-
-
-        TreeNode root = new TreeNode(preorder[0]);
-
-        List<TreeNode> Leftlist = new ArrayList();
-        // count how many in left
-        int i = 0;
-        while(i < inorder.length) {
-            if(inorder[i] == root.val) {
-                // Leftlist.add(new TreeNode(inorder(i)))
-                i++;
-            }
+    public void inorderTraversal(TreeNode root) {
+        if (root == null) {
+            return;
         }
-        root.left = constructLeft(Leftlist);
+        inorderTraversal(root.left);
+        System.out.print(root.val);
+        inorderTraversal(root.right);
+    }
 
-         // count how many in right
-        List<TreeNode> Rightlist = new ArrayList();
-        int j = i;
-        while(j < inorder.length) {
-                // Leftlist.add(new TreeNode(inorder(i)))
-                j++;
-            
-        }
-        for ( int j = i; j < inorder.lenth; j++) {
-            Rightlist.add(new TreeNode(inorder(j)))
-        }
-        root.right = constructRight(RightList);
-
+    public static void main(String[] args) {
+        BST_InPre obj = new BST_InPre();
+        int[] preorder = { 3, 9, 20, 15, 7 };
+        int[] inorder = { 9, 3, 15, 20, 7 };
+        TreeNode root = obj.buildTree(preorder, inorder);
+        obj.inorderTraversal(root);
     }
 }
