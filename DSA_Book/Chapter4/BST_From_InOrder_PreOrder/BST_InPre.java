@@ -40,7 +40,6 @@ class BST_InPre {
         // Assignt to left
         root.left = buildTree(newPreOrderLeft, newInOrderLeft);
         // System.out.print(mid);
-        // System.out.print(preorder.length);
         int[] newPreOrderRight = null;
         int[] newInOrderRight = null;
         if ((mid + 1) < preorder.length) {
