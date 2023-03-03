@@ -30,10 +30,10 @@ class BST_InPre {
         // Create TreeNode root, which is the first value in the preorder array
         TreeNode root = new TreeNode(preorder[0]);
 
-        // Get index of root in preorder array
+        // Get index of root in inorder array
         int mid = getIndex(preorder[0], inorder);
 
-        // Partition inorder array into left and right subtree with the help of mid
+        // Partition inorder & pre order array into left and right subtree with the help of mid
         int[] newPreOrderLeft = Arrays.copyOfRange(preorder, 1, mid + 1);
         int[] newInOrderLeft = Arrays.copyOfRange(inorder, 0, mid);
 
