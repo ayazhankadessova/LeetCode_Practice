@@ -70,6 +70,78 @@ public class BTree {
     // }
     // }
 
+    // Insertion Operation
+
+    // 1. If the tree is empty, allocate a root node and insert the key.
+    // 2. Update the allowed number of keys in the node.
+    // 3. Search the appropriate node for insertion.If the node is full, follow the
+    // steps below.
+    // - Insert the elements in increasing order.Now,there are elements greater than
+    // its limit.
+    // - So, split at the median.
+    // - Push the median key upwards and make the left keys as a left child and the
+    // right keys as a right child.
+    // If the
+    // node is
+    // not full, follow
+    // the steps
+    // below.Insert the
+    // node in
+    // increasing order.
+
+    public void insert(int key) {
+        Node r = root;
+        if (r == null) {
+            r = new Node();
+            r.key[0] = key;
+            r.height = 1;
+        } else {
+            if (r.height == 2 * T - 1) {
+                Node s = new Node();
+                root = s;
+                s.leaf = false;
+                s.height = 0;
+                s.children[0] = r;
+                splitChild(s, 0, r);
+                insertNonFull(s, key);
+            } else {
+                insertNonFull(r, key);
+            }
+        }
+
+    }
+
+    // insert node
+    final private void _insert(Node x, int k) {
+
+        if (x.leaf) {
+            int i = 0;
+            // insert the key in the right position
+            for (i = x.n - 1; i >= 0 && k < x.key[i]; i--) {
+                x.key[i + 1] = x.key[i];
+            }
+            x.key[i + 1] = k;
+            x.n = x.n + 1;
+        } else {
+            // if the node is not leaf, find the right child
+            int i = 0;
+            for (i = x.n - 1; i >= 0 && k < x.key[i]; i--) {
+            }
+            ;
+            i++;
+            Node tmp = x.child[i];
+            // if the child is full, split it
+            if (tmp.n == 2 * T - 1) {
+                split(x, i, tmp);
+                if (k > x.key[i]) {
+                    i++;
+                }
+            }
+            _insert(x.child[i], k);
+        }
+
+    }
+
     // private void insert(Node root, int data) {
     // Node x = root;
 
