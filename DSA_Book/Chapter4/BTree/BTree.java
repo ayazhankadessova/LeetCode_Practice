@@ -81,13 +81,7 @@ public class BTree {
     // - So, split at the median.
     // - Push the median key upwards and make the left keys as a left child and the
     // right keys as a right child.
-    // If the
-    // node is
-    // not full, follow
-    // the steps
-    // below.Insert the
-    // node in
-    // increasing order.
+    // If the node is not full, follow the steps below.Insert the node in increasing order.
 
     public void insert(int key) {
         Node r = root;
