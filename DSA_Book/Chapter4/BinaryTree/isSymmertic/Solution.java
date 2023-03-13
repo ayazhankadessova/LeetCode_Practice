@@ -14,6 +14,15 @@
  * }
  */
 
+/**
+ * 1. Look at the base case: Root == null -> True
+ * 2. Next -> compare left and right
+ * 3. Eventually, we are comparing that left.left == right.right and left.right == right.left
+ * 4. If we get to a point where left == null && right == null, return true
+ * 5. If we get to a point where left == null || right == null || left.val != right.val, return false
+ * 6. If we get to a point where left.left == right.right && left.right == right.left, return true
+ * 7. Recursively call the function
+ */
 public class TreeNode {
 
     int val;
