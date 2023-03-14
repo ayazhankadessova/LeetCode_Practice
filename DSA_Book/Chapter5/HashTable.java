@@ -1,9 +1,11 @@
+
 // package DSA_Book.Chapter5;
+import java.util.LinkedList;
 
 // Creating HashTable with 
 public class HashTable {
     int[] HashTable = new int[10];
-    // LinkedList<Word>[] SepChainHashTable;
+    LinkedList<Integer>[] SepChainHashTable;
     DataStructure dataStru;
     int numSearched = 0;
 
@@ -18,7 +20,7 @@ public class HashTable {
                 QuadraticProbCreate(Numbers);
                 break;
             case SepChain:
-                // SepChainCreate(dictionary);
+                SepChainCreate(Numbers);
                 break;
             case DoubleHash:
                 DoubleHashCreate(Numbers);
@@ -245,6 +247,60 @@ public class HashTable {
         }
     }
 
+    // Create a new Hashtable with Separate Chaining
+    /**
+     * 1. Iterate through every item
+     * 2. If the slot is empty, create a new LinkedList
+     * 3. Add the item to the LinkedList
+     * 4. If the slot is not empty, add the item to the LinkedList
+     * 5. The LinkedList will be created in the HashTable array
+     */
+    public void SepChainCreate(int[] Numbers) {
+        SepChainHashTable = new LinkedList[155285];
+        // HashTable = new int[10];
+        for (int number : Numbers) {
+            int Initialplace = HashFunction(number);
+
+            if (SepChainHashTable[Initialplace % HashTable.length] == null) {
+                SepChainHashTable[Initialplace % HashTable.length] = new LinkedList<Integer>();
+                SepChainHashTable[Initialplace % HashTable.length].add(number);
+            } else {
+                SepChainHashTable[Initialplace % HashTable.length].add(number);
+            }
+
+        }
+        System.out.println("No collisions in Separate Chaining : D  ");
+    }
+
+    // Search in a Hashtable with Separate Chaining
+    private int SepChainSearch(int number) {
+        int place = 0;
+        int i = 0;
+        place = HashFunction(number);
+
+        boolean notfound = true;
+        int word;
+        while (notfound) {
+            numSearched++;
+            if (SepChainHashTable[place % SepChainHashTable.length] != null) {
+                if (SepChainHashTable[place % SepChainHashTable.length].get(i) == number) {
+                    System.out.println("Found " + number + " at " + place);
+                    return i;
+                } else {
+                    i++;
+                    if (SepChainHashTable[place % SepChainHashTable.length].size() <= i) {
+                        System.out.println(number + " not found");
+                        return 0;
+                    }
+                }
+            } else {
+                System.out.println(number + " not found");
+                return 0;
+            }
+        }
+        return 0;
+    }
+
     private int HashFunction2(int number) {
         return 7 - (number % 7);
     }
@@ -255,9 +311,9 @@ public class HashTable {
 
     public static void main(String[] args) {
         int[] Numbers = { 4371, 1323, 6173, 4199, 4344, 9679, 1989 };
+
+        // Create a new HashTable with Linear Probing
         HashTable ht = new HashTable(DataStructure.LinProb, Numbers);
-        // System.out.println(ht.LinProbSearch(1));
-        // System.out.println(ht.numSearched);
 
         for (int i = 0; i < ht.HashTable.length; i++) {
             System.out.println(ht.HashTable[i]);
@@ -268,6 +324,7 @@ public class HashTable {
             System.out.println(ht.LinProbSearch(Numbers[i]));
         }
 
+        // Create a new HashTable with Quadratic Probing
         HashTable ht2 = new HashTable(DataStructure.QuadProb, Numbers);
 
         for (int i = 0; i < ht2.HashTable.length; i++) {
@@ -279,6 +336,7 @@ public class HashTable {
             System.out.println(ht2.QuadraticProbSearch(Numbers[i]));
         }
 
+        // Create a new HashTable with Double Hashing
         HashTable ht3 = new HashTable(DataStructure.DoubleHash, Numbers);
 
         for (int i = 0; i < ht3.HashTable.length; i++) {
@@ -288,6 +346,26 @@ public class HashTable {
         // Testing Double Hash Search
         for (int i = 0; i < Numbers.length; i++) {
             System.out.println(ht3.DoubleHashSearch(Numbers[i]));
+        }
+
+        // Create a new HashTable with Separate Chaining
+        HashTable ht4 = new HashTable(DataStructure.SepChain, Numbers);
+
+        for (int i = 0; i < ht4.HashTable.length; i++) {
+            System.out.println("At index " + i + " : ");
+            if (ht4.SepChainHashTable[i] != null) {
+                for (int j = 0; j < ht4.SepChainHashTable[i].size(); j++) {
+                    System.out.println(ht4.SepChainHashTable[i].get(j));
+                }
+            } else {
+
+                System.out.println("null");
+            }
+        }
+
+        // Testing Separate Chain Search
+        for (int i = 0; i < Numbers.length; i++) {
+            System.out.println(ht4.SepChainSearch(Numbers[i]));
         }
 
     }
