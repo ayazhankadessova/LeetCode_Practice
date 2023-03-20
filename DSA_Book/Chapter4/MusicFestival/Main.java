@@ -4,7 +4,9 @@ package MusicFestival;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Main {
 
@@ -31,19 +33,19 @@ public class Main {
     }
 
     static ArrayList<Integer> resize(ArrayList<Integer> a) {
-        ArrayList<Integer> a1 = new ArrayList<>();
+        ArrayList<Integer> newAlbums = new ArrayList<>();
         int n = a.size();
         int mx = 0;
         for (int i = 0; i < n; ++i) {
             if (a.get(i) > mx) {
-                a1.add(a.get(i));
+                newAlbums.add(a.get(i));
                 mx = a.get(i);
             }
         }
-        return a1;
+        return newAlbums;
     }
 
-    public static void main(String[] args) {
+    static void solve() {
         Scanner in = new Scanner(System.in);
         int numberAlbums = in.nextInt();
         ArrayList<ArrayList<Integer>> allAlbums = new ArrayList<>();
@@ -63,13 +65,59 @@ public class Main {
             newAlbums.add(resize(allAlbums.get(j)));
         }
 
-        int max = 0;
-        for (int album = 0; album < newAlbums.size(); album++) {
-            int compute = compute(newAlbums, album);
-            if (compute > max) {
-                max = compute;
+        for (int i = 0; i < numberAlbums; i++) {
+            System.out.println("Album : ");
+            for (int j = 0; j < newAlbums.get(i).size(); j++) {
+                System.out.print(newAlbums.get(i).get(j) + " ");
             }
         }
-        System.out.println(max);
+
+        TreeMap<Integer, ArrayList<Integer>> b = new TreeMap<>();
+        // int x = 0;
+        for (int i = 0; i < numberAlbums; ++i) {
+            for (int x : newAlbums.get(i)) {
+                if (!b.containsKey(x)) {
+                    System.out.println("contains" + x);
+                    b.put(x, new ArrayList<>());
+                }
+                b.get(x).add(i);
+            }
+        }
+
+        System.out.println(b);
+
+        int[] dp = new int[numberAlbums];
+        int closed = 0;
+        for (Map.Entry<Integer, ArrayList<Integer>> entry : b.entrySet()) {
+            int c = entry.getKey();
+            System.out.println("Testing with " + c);
+            int newclosed = 0;
+            for (int i : entry.getValue()) {
+                if (c == newAlbums.get(i).get(newAlbums.get(i).size() - 1)) {
+                    dp[i] = Math.max(dp[i] + 1, closed + 1);
+                    System.out.println("new max 1:" + dp[i]);
+                    newclosed = Math.max(newclosed, dp[i]);
+                    continue;
+                }
+                if (c == newAlbums.get(i).get(0)) {
+                    dp[i] = closed + 1;
+                    System.out.println("new max 2:" + dp[i]);
+                    continue;
+                }
+                dp[i] = Math.max(dp[i] + 1, closed + 1);
+                System.out.println("new max end:" + dp[i]);
+            }
+            closed = Math.max(closed, newclosed);
+        }
+        System.out.println(Arrays.stream(dp).max().getAsInt());
+
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        for (int k = 0; k < t; k++) {
+            solve();
+        }
     }
 }
