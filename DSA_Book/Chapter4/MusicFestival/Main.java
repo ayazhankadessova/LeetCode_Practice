@@ -1,35 +1,64 @@
-package MusicFestival;
 
 // https://codeforces.com/problemset/problem/1801/C
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 public class Main {
+    // static MyScanner sc = new MyScanner();
+    public static PrintWriter out;
 
-    public static int compute(ArrayList<ArrayList<Integer>> a, int x) {
-        int start = a.get(x).size() - 1;
+    // -----------MyScanner class for faster input----------
+    public static class MyScanner {
+        BufferedReader sc;
+        StringTokenizer st;
 
-        ArrayList<Integer> newArr = a.get(x);
-        int currentMax = a.get(x).get(start);
+        public MyScanner() {
+            sc = new BufferedReader(new InputStreamReader(System.in));
+        }
 
-        for (int i = 0; i < a.size(); i++) {
-            int length = a.get(i).size();
-            if (i != x && a.get(i).get(0) > currentMax) {
-                start += length;
-                currentMax = a.get(i).get(length - 1);
-                newArr.addAll(a.get(i));
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(sc.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+            return st.nextToken();
         }
 
-        for (int i = 0; i < newArr.size(); i++) {
-            System.out.print(newArr.get(i) + " ");
+        int nextInt() {
+            return Integer.parseInt(next());
         }
-        System.out.println("result" + start + "\n");
-        return start;
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            String str = "";
+            try {
+                str = sc.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
+
     }
 
     static ArrayList<Integer> resize(ArrayList<Integer> a) {
@@ -45,16 +74,17 @@ public class Main {
         return newAlbums;
     }
 
-    static void solve() {
-        Scanner in = new Scanner(System.in);
-        int numberAlbums = in.nextInt();
+    static void solve(MyScanner sc) {
+        // Scanner sc = new Scanner(System.sc);
+
+        int numberAlbums = sc.nextInt();
         ArrayList<ArrayList<Integer>> allAlbums = new ArrayList<>();
 
         for (int i = 0; i < numberAlbums; ++i) {
-            int numberSongs = in.nextInt();
+            int numberSongs = sc.nextInt();
             ArrayList<Integer> songs = new ArrayList<>();
             for (int j = 0; j < numberSongs; ++j) {
-                songs.add(in.nextInt());
+                songs.add(sc.nextInt());
             }
             allAlbums.add(songs);
         }
@@ -65,59 +95,56 @@ public class Main {
             newAlbums.add(resize(allAlbums.get(j)));
         }
 
-        for (int i = 0; i < numberAlbums; i++) {
-            System.out.println("Album : ");
-            for (int j = 0; j < newAlbums.get(i).size(); j++) {
-                System.out.print(newAlbums.get(i).get(j) + " ");
-            }
-        }
-
         TreeMap<Integer, ArrayList<Integer>> b = new TreeMap<>();
         // int x = 0;
         for (int i = 0; i < numberAlbums; ++i) {
             for (int x : newAlbums.get(i)) {
                 if (!b.containsKey(x)) {
-                    System.out.println("contains" + x);
                     b.put(x, new ArrayList<>());
                 }
                 b.get(x).add(i);
             }
         }
 
-        System.out.println(b);
-
         int[] dp = new int[numberAlbums];
         int closed = 0;
         for (Map.Entry<Integer, ArrayList<Integer>> entry : b.entrySet()) {
             int c = entry.getKey();
-            System.out.println("Testing with " + c);
+            // System.out.println("Testing with " + c);
+
             int newclosed = 0;
             for (int i : entry.getValue()) {
                 if (c == newAlbums.get(i).get(newAlbums.get(i).size() - 1)) {
                     dp[i] = Math.max(dp[i] + 1, closed + 1);
-                    System.out.println("new max 1:" + dp[i]);
+                    // System.out.println("new max 1:" + dp[i]);
                     newclosed = Math.max(newclosed, dp[i]);
                     continue;
                 }
                 if (c == newAlbums.get(i).get(0)) {
                     dp[i] = closed + 1;
-                    System.out.println("new max 2:" + dp[i]);
+                    // System.out.println("new max 2:" + dp[i]);
                     continue;
                 }
                 dp[i] = Math.max(dp[i] + 1, closed + 1);
-                System.out.println("new max end:" + dp[i]);
+                // System.out.println("new max end:" + dp[i]);
             }
             closed = Math.max(closed, newclosed);
         }
-        System.out.println(Arrays.stream(dp).max().getAsInt());
+        out.println(Arrays.stream(dp).max().getAsInt());
 
     }
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int t = in.nextInt();
-        for (int k = 0; k < t; k++) {
-            solve();
+
+        MyScanner sc = new MyScanner();
+        out = new PrintWriter(new BufferedOutputStream(System.out));
+        int testcases = sc.nextInt();
+        // sc.close();
+        while (testcases-- > 0) {
+            solve(sc);
         }
+
+        out.close();
     }
+
 }
