@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 // Creating HashTable with 
 public class HashTable {
-    int[] HashTable = new int[10];
+    int[] HashTable = new int[7];
     LinkedList<Integer>[] SepChainHashTable;
     DataStructure dataStru;
     int numSearched = 0;
@@ -310,7 +310,7 @@ public class HashTable {
     }
 
     public static void main(String[] args) {
-        int[] Numbers = { 4371, 1323, 6173, 4199, 4344, 9679, 1989 };
+        int[] Numbers = { 7, 22, 12, 5, 39, 72, 29, 14, 18, 65, 27, 62 };
 
         // Create a new HashTable with Linear Probing
         HashTable ht = new HashTable(DataStructure.LinProb, Numbers);
