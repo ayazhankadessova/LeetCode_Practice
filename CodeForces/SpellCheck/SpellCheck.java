@@ -2,8 +2,6 @@
 
 import java.util.Scanner;
 
-// package CodeForces.SpellCheck;
-
 public class SpellCheck {
 
     class Word {
@@ -65,13 +63,7 @@ public class SpellCheck {
 
         System.out.println(list.getCount());
         list.print();
-        // String[] input = new String[m];
-        // for (int i = 0; i < m; i++) {
-        // input[i] = sc.next();
-        // }
-        // sc.close();
-        // SpellCheck spellCheck = new SpellCheck();
-        // spellCheck.solve(words, descriptions, input);
+
     }
 
 }
