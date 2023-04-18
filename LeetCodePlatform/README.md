@@ -9,8 +9,12 @@ Linear
 
 April, 18
 
+MergeStringsAlternatively
+
 Hashtable Insert O(1) * (m+n) = O(m+n)
+
 Look up O(1) * (m+n) = O(m+n)
+
 2 * O(m+n) ~ O(m+n)
 
 https://leetcode.com/problems/merge-strings-alternately/description/?q=hash&orderBy=most_relevant
