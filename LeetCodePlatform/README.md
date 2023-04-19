@@ -38,4 +38,6 @@ Gifts from the richest pile
 
 O(n+k*logn+n*logn)
 
+https://github.com/ayazhankadessova/LeetCode_Practice/tree/main/LeetCodePlatform/Heap/GiftsFromRichestPile
+
 
