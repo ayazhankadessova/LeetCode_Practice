@@ -26,4 +26,16 @@ https://leetcode.com/problems/merge-strings-alternately/description/?q=hash&orde
 
 https://github.com/ayazhankadessova/LeetCode_Practice/tree/main/LeetCodePlatform/HashTable/MergeStringsAlternatively
 
+April, 19
+
+https://leetcode.com/problems/take-gifts-from-the-richest-pile/description/
+Gifts from the richest pile
+
+1. Use max heap to insert every gift 
+2. delmax and put back remaining from max -sqrt(max)
+3. keep iterating for k , find max every time [logN]
+4. add all that is left [logN]
+
+O(n+k*logn+n*logn)
+
 
