@@ -1,0 +1,4 @@
+D. Very Beautiful Number - https://codeforces.com/problemset/problem/879/D
+E. Thematic Contests - https://codeforces.com/problemset/problem/1070/E
+B. Heap Operations - https://codeforces.com/problemset/problem/681/B
+D. Number With The Given Amount Of Divisors - https://codeforces.com/problemset/problem/1101/D
