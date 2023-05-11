@@ -92,7 +92,7 @@ public class Main {
         HashSet<Integer> tastes = new HashSet<>();
         backtrack(tastes, new ArrayList<>(), nums, 0);
 
-        return tastes.size() <= 1;
+        return tastes.size() == 0;
 
     }
 
@@ -113,26 +113,4 @@ public class Main {
         }
     }
 
-}
-
-    hashmap
-
-public static void generateWoks(int wok, int[] toppings, int n,
-HashSet<Integer> tastes) {
-
-if (n == 0) {
-
-if (tastes.contains(wok)) {
-tastes.remove(wok);
-} else {
-tastes.add(wok);
-}
-} else {
-// Recursive case: consider adding each topping to the wok
-generateWoks(wok + toppings[n - 1], toppings, n - 1, tastes); // Add the last
-topping to wok
-
-generateWoks(wok, toppings, n - 1, tastes); // Don't add the last topping to
-wok
-}
 }
